@@ -34,33 +34,36 @@
 <body>
 
     <div class="container">
-        <div class="row row-content" ng-controller= "menuController as menuCtrl">
+        <div class="row row-content" ng-controller= "MenuController">
             
                           
             
             
             <div class="col-xs-12">
+			 <button ng-click="toggleDetails()" class="btn btn-xs btn-primary pull-right" type="button">
+                    {{showDetails ? 'Hide Details':'Show Details'}}
+                </button> 
                  <ul class=" nav nav-tabs" role = "tablist">
-                    <li role = "presentation"  ng-class = "{active:menuCtrl.isSelected(1)}" >
-                        <a role="tab" ng-click ="menuCtrl.select(1)" aria-controls="all menu">The Menu</a>
+                    <li role = "presentation"  ng-class = "{active:isSelected(1)}" >
+                        <a role="tab" ng-click ="select(1)" aria-controls="all menu">The Menu</a>
                     </li>
-                    <li role="presentation" ng-class = "{active:menuCtrl.isSelected(2)}">
-                        <a role="tab"  ng-click ="menuCtrl.select(2)"  aria-controls= "appetizers" >Appatizers</a>
-                    </li>
-
-                    <li role="presentation"  ng-class = "{active:menuCtrl.isSelected(3)}">
-                        <a role="tab"  ng-click ="menuCtrl.select(3)" aria-controls="mains">Mains</a>
+                    <li role="presentation" ng-class = "{active:isSelected(2)}">
+                        <a role="tab"  ng-click ="select(2)"  aria-controls= "appetizers" >Appatizers</a>
                     </li>
 
-                    <li role="presentation" ng-class = "{active:menuCtrl.isSelected(4)}">
-                        <a role="tab"  ng-click ="menuCtrl.select(4)"  aria-controls="desserts">Desserts</a>
+                    <li role="presentation"  ng-class = "{active:isSelected(3)}">
+                        <a role="tab"  ng-click ="select(3)" aria-controls="mains">Mains</a>
+                    </li>
+
+                    <li role="presentation" ng-class = "{active:isSelected(4)}">
+                        <a role="tab"  ng-click ="select(4)"  aria-controls="desserts">Desserts</a>
                     </li>
 
                </ul>
                 <div class="tab-content">
                 <ul class="media-list  tab-pane fade in active">
                     
-                <li class = "media" ng-repeat = "dish in menuCtrl.dishes | filter:menuCtrl.filtText">
+                <li class = "media" ng-repeat = "dish in dishes | filter:filtText">
                     
                     <div class = "media-left media-middle">
                         <a href="#">
@@ -71,7 +74,7 @@
                         <div class = "media-heading">{{dish.name}}</div>
                         <div class = "label label-danger">{{dish.label}}</div>
                         <div class = "badge">{{dish.price|currency}}</div>
-                        <p>{{dish.description}}</p>
+                         <p ng-show="showDetails">{{dish.description}}</p>
                         
                     </div> 
                 </li>
